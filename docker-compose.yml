@@ -1,0 +1,35 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    container_name: postgres_container
+    environment:
+      POSTGRES_USER: inventory_user
+      POSTGRES_PASSWORD: inventory_pass
+      POSTGRES_DB: inventory_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - inventory_network
+
+  app:
+    build: .
+    container_name: inventory_app
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/inventory_db
+      DB_USERNAME: inventory_user
+      DB_PASSWORD: inventory_pass
+    depends_on:
+      - db
+    ports:
+      - "8080:8080"
+    networks:
+      - inventory_network
+
+volumes:
+  db_data:
+
+networks:
+  inventory_network:
