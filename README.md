@@ -39,7 +39,7 @@ A microservice built with Spring Boot and PostgreSQL for managing products and c
 ## Users & Roles
 
 - **Admin (admin/admin)**: Full access to products and categories.
-- **User (user/user)**: Access to products only.
+- **User (user/password)**: Access to products only.
 
 ## Authentication
 
